@@ -1,0 +1,36 @@
+This project uses the following third-party open source software:
+
+- LangChain Core, LangChain Community, LangChain HuggingFace, LangChain Ollama
+  License: Apache License 2.0
+  URL: https://github.com/langchain-ai/langchain
+
+- FAISS
+  License: MIT License
+  URL: https://github.com/facebookresearch/faiss
+
+- PyTorch
+  License: BSD-style License
+  URL: https://pytorch.org/
+
+- scikit-learn
+  License: BSD License
+  URL: https://scikit-learn.org/
+
+- NumPy
+  License: BSD License
+  URL: https://numpy.org/
+
+- python-magic
+  License: MIT License
+  URL: https://github.com/ahupp/python-magic
+
+- sentence-transformers/LaBSE (embedding model)
+  License: Apache License 2.0
+  URL: https://huggingface.co/sentence-transformers/LaBSE
+
+Note:
+- This repository does not distribute model weights directly.
+- Models obtained via Hugging Face Hub or Ollama are subject to the license
+  specified by the model provider. Users must ensure compliance with the
+  corresponding model license, especially for commercial use.
+
