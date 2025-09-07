@@ -28,12 +28,12 @@ Ollama を利用してローカル環境で LLM を実行し、PDF・HTML・テ�
 
 ### 1. ベクトルストアの作成
 ```
-python rag_chatbot.py --rebuild
+python rag-chatbot.py --rebuild
 ```
 
 ### 2. チャットボットの起動
 ```
-python rag_chatbot.py
+python rag-chatbot.py
 ```
 
 ### 実行例
@@ -54,7 +54,7 @@ python -W ignore::FutureWarning rag-chatbot.py
 .
 ├── LICENSE                   # Apache 2.0 ライセンス
 ├── README.md                 # 簡易説明
-├── rag_chatbot.py            # メインプログラム
+├── rag-chatbot.py            # メインプログラム
 ├── third_party_licenses.txt  # 3rdパーティ ライセンス
 └── docs/
     └── overview.md           # 技術解説記事（詳細版）
