@@ -38,10 +38,8 @@ def load_documents():
         "text/plain": lambda fp: TextLoader(fp, encoding="utf-8"),
         "text/csv": CSVLoader
         }
-#    for filename in os.listdir("docs"):
-#        filepath = os.path.join("docs", filename)
-    for filename in os.listdir("docs_employee"):
-        filepath = os.path.join("docs_employee", filename)
+    for filename in os.listdir("docs"):
+        filepath = os.path.join("docs", filename)
         mime = magic.from_file(filepath, mime=True)
         print(f"{filename} → MIME: {mime}")
         loader_class = loaders.get(mime)
@@ -76,7 +74,7 @@ def create_vector_db(chunks, embeddings):
         nlist = min(100, max(1, vectors.shape[0] // 40))
         print(f"IndexIVFFlatを使用します。クラスタ数 nlist: {nlist}")
         quantizer = faiss.IndexFlatIP(d)
-        index = faiss.IndexIVFFlat(quantizer, d, nlist, faiss.METRIC_INNER_PRODUCT)    # IVF(IndexIVFFlat) は、事前に全ベクトルをクラスタリングして、クエリと近いクラスタだけ探索する。
+        index = faiss.IndexIVFFlat(quantizer, d, nlist, faiss.METRIC_INNER_PRODUCT)
         index.train(vectors)    # .train() で事前にクラスタを作る（これがIVFの肝）
     index.add(vectors)
     
@@ -167,7 +165,6 @@ if __name__ == "__main__":
         vectorstore.index = faiss.index_cpu_to_gpu(res, 0, vectorstore.index)   # vectorstore.indexをCUDA デバイス 0 に転送する。
         
     retriever = vectorstore.as_retriever(search_kwargs={"k": 5})
-#    retriever = vectorstore.as_retriever(search_type="similarity_score_threshold", search_kwargs={"score_threshold": 0.5, "k": 5})
     llm = OllamaLLM(model="hf.co/mmnga/llm-jp-3.1-1.8b-instruct4-gguf:Q8_0")    # 他のモデルの例: "gpt-oss:20b"
     
     print("チャットを開始します。終了するには exit と入力してください。")
@@ -183,6 +180,11 @@ if __name__ == "__main__":
 
         print("【回答】:", response["result"])
         print("【処理時間】:{:.2f} 秒".format(elapsed))
+#
+#       Vector Storeの検索結果を回答のあとに表示したい場合は、
+#       1) answer_with_filtered_docs()にある検索結果を表示するコードをコメントアウトし、
+#       2) 以下のコードのコメントアウトを外す。
+#
 #        print("【出典】:")
 #        for i, doc in enumerate(response["source_documents"], start=1):
 #            print(f"--- [{i}] ---")

@@ -42,6 +42,13 @@ python rag_chatbot.py
 【回答】: こんにちは！ご質問があればどうぞ。
 ```
 
+### 注意
+
+プログラムを実行するとき`FutureWarning:`が表示された場合は、次のようにコマンドを実行して下さい。
+```
+python -W ignore::FutureWarning rag-chatbot.py
+```
+
 ## 📂 ディレクトリ構成
 ```
 .
